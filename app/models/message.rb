@@ -1,4 +1,3 @@
-class Message < ActiveRecord:: Migration
-  belongs_to :user
+class Message < ActiveRecord::Base
+   belongs_to :user
 end
-
