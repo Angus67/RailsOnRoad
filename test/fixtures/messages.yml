@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  body: MyText
+  body: MyString
   user_agent: MyString
   user_id: 1
 
 two:
-  body: MyText
+  body: MyString
   user_agent: MyString
   user_id: 1
