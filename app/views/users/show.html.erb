@@ -1,20 +1,39 @@
-<% if @user == current_user %>
-<h1> Its you </h1> 
-<% end %>
-
 <p>
   <%=h @user.login %>
 </p>
 
+<% if @user == current_user %>
+<h1> Its you </h1> 
+
+<h1>New message</h1>
+
+<% form_for(@message) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :body %><br />
+    <%= f.text_field :body %>
+  </p>
+<p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+<% end %>
 <p>
   <b>Last messages : </b>
   <% @messages.each{|message| %>
     <li>
-      <%= message.body %>
+       <%= message.body %>
+      <br>
+      <h6>
+      <%= 'Poster le:' %>
+      <%= message.created_at%>
+      </h6>
     </li>
     <% } %>
 </p>
 
+<%= will_paginate @messages %>
 
 <%= link_to "Edit", edit_account_path %>
 
