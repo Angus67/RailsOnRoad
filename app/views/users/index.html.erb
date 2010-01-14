@@ -1,0 +1,41 @@
+<% if current_user.present? %>
+<p>
+<h1> Its you. <%= current_user.login %> </h1> 
+</p>
+
+<h1>New message</h1>
+
+<% form_for(@message) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :body %><br />
+    <%= f.text_field :body %>
+  </p>
+<p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+<% end %>
+
+<p>
+  <b>Last messages : </b>
+  <% @messages.each{|message| %>
+    <li>
+       <%= message.body %>
+      <br>
+      <h6>
+      <%= 'Poster le:' %>
+      <%= message.created_at%>
+      <%= 'Avec :' %>
+      <%= message.user_agent %>
+      <%= 'Par :' %>
+      <%= link_to message.user.login, user_path(message.user.login) %>
+      </h6>
+    </li>
+    <% } %>
+</p>
+
+<%= will_paginate @messages %>
+
+<%= link_to "Edit", edit_account_path %>

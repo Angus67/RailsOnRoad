@@ -29,7 +29,7 @@ class MessagesController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @message }
-    end
+  end
   end
 
   # GET /messages/1/edit
@@ -41,6 +41,8 @@ class MessagesController < ApplicationController
   # POST /messages.xml
   def create
     @message = Message.new(params[:message])
+    @message.user_agent = request.env["HTTP_USER_AGENT"].split(" ").first
+    @message.user_id = current_user.id
 
     respond_to do |format|
       if @message.save

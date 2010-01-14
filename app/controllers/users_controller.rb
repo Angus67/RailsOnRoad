@@ -18,10 +18,14 @@ class UsersController < ApplicationController
   
   def show
     @message = Message.new
-    @user = User.find(params[:id])
-    @messages = @user.messages.paginate(:page => params[:page], :per_page => 5, :order => 'created_at DESC')
+    @user = User.find_by_login(params[:id])
+    @messages = @user.messages.paginate(:page => params[:page], :per_page => 5, :order => 'messages.created_at DESC')
     
+  end   
     
+  def index
+    @messages = Message.paginate(:page => params[:page], :per_page => 5, :order => 'messages.created_at DESC')
+    @message = Message.new
   end
  
   def edit
